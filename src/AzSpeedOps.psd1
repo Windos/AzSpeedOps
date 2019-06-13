@@ -1,11 +1,11 @@
 @{
-    RootModule        = 'SpeedRun.psm1'
+    RootModule        = 'AzSpeedOps.psm1'
     ModuleVersion     = '0.0.1'
-    GUID              = '42303cf2-7ea5-4ea0-bb18-c7897cc42e0b'
+    GUID              = 'e79f270e-4bfa-4619-9a59-193b4178cbe3'
     Author            = 'Joshua (Windos) King'
     CompanyName       = 'ToastIT.dev'
     Copyright         = '(c) 2019 Joshua (Windos) King. All rights reserved.'
-    Description       = 'Module for PS Power Hour demo.'
+    Description       = 'Demo Module for Azure Pipelines Speed Run during PS Power Hour.'
     PowerShellVersion = '5.0'
     FunctionsToExport = 'Get-NumberTrivia',
                         'Measure-RandomNumbers'
@@ -14,8 +14,8 @@
     PrivateData       = @{
         PSData = @{
             Tags         = @('Demo', 'PSPowerHour')
-            LicenseUri   = 'https://github.com/Windos/SpeedRun/blob/master/LICENSE'
-            ProjectUri   = 'https://github.com/Windos/SpeedRun'
+            LicenseUri   = 'https://github.com/Windos/AzSpeedOps/blob/master/LICENSE'
+            ProjectUri   = 'https://github.com/Windos/AzSpeedOps'
             ReleaseNotes = '# 0.0.1
 
 * Added new functions!
