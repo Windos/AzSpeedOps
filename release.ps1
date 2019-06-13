@@ -9,7 +9,7 @@ param(
 
 # Define Tag step
 if ($DefineTag.IsPresent) {
-    $ReleaseVersion = Get-Content -Path $env:ArtifactDir\SpeedRun\release-version.txt
+    $ReleaseVersion = Get-Content -Path $env:ArtifactDir\AzSpeedOps\release-version.txt
     Write-Host "##vso[task.setvariable variable=RELEASETAG]$ReleaseVersion"
 }
 
@@ -18,13 +18,13 @@ if ($Publish.IsPresent) {
     # Publish Module to PowerShell Gallery
     Try {
         $Splat = @{
-            Path        = (Resolve-Path -Path $env:ArtifactDir\SpeedRun\SpeedRun)
+            Path        = (Resolve-Path -Path $env:ArtifactDir\AzSpeedOps\AzSpeedOps)
             NuGetApiKey = $env:PSGallery
             ErrorAction = 'Stop'
         }
         Publish-Module @Splat
 
-        Write-Output -InputObject ('SpeedRun PowerShell Module published to the PowerShell Gallery')
+        Write-Output -InputObject ('AzSpeedOps PowerShell Module published to the PowerShell Gallery')
     } Catch {
         throw $_
     }

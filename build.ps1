@@ -9,39 +9,39 @@ param(
 
 # Compile step
 if ($Compile.IsPresent) {
-    if (Get-Module SpeedRun) {
-        Remove-Module SpeedRun -Force
+    if (Get-Module AzSpeedOps) {
+        Remove-Module AzSpeedOps -Force
     }
 
-    if ((Test-Path .\SpeedRun)) {
-        Remove-Item -Path .\SpeedRun -Recurse -Force
+    if ((Test-Path .\AzSpeedOps)) {
+        Remove-Item -Path .\AzSpeedOps -Recurse -Force
     }
 
-    if (-not (Test-Path .\SpeedRun)) {
-        $null = New-Item -Path .\SpeedRun -ItemType Directory
+    if (-not (Test-Path .\AzSpeedOps)) {
+        $null = New-Item -Path .\AzSpeedOps -ItemType Directory
     }
 
-    Copy-Item -Path '.\src\*' -Filter '*.*' -Exclude '*.ps1', '*.psm1' -Destination .\SpeedRun -Force
-    Remove-Item -Path .\SpeedRun\Private, .\SpeedRun\Public -Recurse -Force
+    Copy-Item -Path '.\src\*' -Filter '*.*' -Exclude '*.ps1', '*.psm1' -Destination .\AzSpeedOps -Force
+    Remove-Item -Path .\AzSpeedOps\Private, .\AzSpeedOps\Public -Recurse -Force
 
     # Copy Module README file
-    Copy-Item -Path '.\README.md' -Destination .\SpeedRun -Force
+    Copy-Item -Path '.\README.md' -Destination .\AzSpeedOps -Force
 
-    Get-ChildItem -Path ".\src\Private\*.ps1" -Recurse | Get-Content | Add-Content .\SpeedRun\SpeedRun.psm1
+    Get-ChildItem -Path ".\src\Private\*.ps1" -Recurse | Get-Content | Add-Content .\AzSpeedOps\AzSpeedOps.psm1
 
     $Public  = @( Get-ChildItem -Path ".\src\Public\*.ps1" -ErrorAction SilentlyContinue )
 
-    $Public | Get-Content | Add-Content .\SpeedRun\SpeedRun.psm1
+    $Public | Get-Content | Add-Content .\AzSpeedOps\AzSpeedOps.psm1
 
-    "`$PublicFunctions = '$($Public.BaseName -join "', '")'" | Add-Content .\SpeedRun\SpeedRun.psm1
+    "`$PublicFunctions = '$($Public.BaseName -join "', '")'" | Add-Content .\AzSpeedOps\AzSpeedOps.psm1
 
     # Compress output, for GitHub release
-    Compress-Archive -Path .\SpeedRun\* -DestinationPath .\SpeedRun.zip
+    Compress-Archive -Path .\AzSpeedOps\* -DestinationPath .\AzSpeedOps.zip
 
     # Re-import module, extract release notes and version
-    Import-Module .\SpeedRun\SpeedRun.psd1 -Force
-    (Get-Module SpeedRun)[0].ReleaseNotes | Add-Content .\release-notes.txt
-    (Get-Module SpeedRun)[0].Version.ToString() | Add-Content .\release-version.txt
+    Import-Module .\AzSpeedOps\AzSpeedOps.psd1 -Force
+    (Get-Module AzSpeedOps)[0].ReleaseNotes | Add-Content .\release-notes.txt
+    (Get-Module AzSpeedOps)[0].Version.ToString() | Add-Content .\release-version.txt
 }
 
 # Test step
