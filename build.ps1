@@ -54,6 +54,6 @@ if($Test.IsPresent) {
     $Result = Invoke-Pester "./test" -OutputFormat NUnitXml -OutputFile TestResults.xml -PassThru
 
     if ($Result.FailedCount -gt 0) {
-        throw "$($res.FailedCount) tests failed."
+        throw "$($Result.FailedCount) tests failed."
     }
 }
