@@ -1,17 +1,8 @@
 [CmdletBinding()]
 param(
     [switch]
-    $DefineTag,
-
-    [switch]
     $Publish
 )
-
-# Define Tag step
-if ($DefineTag.IsPresent) {
-    $ReleaseVersion = Get-Content -Path $env:ArtifactDir\AzSpeedOps\release-version.txt
-    Write-Host "##vso[task.setvariable variable=RELEASETAG]$ReleaseVersion"
-}
 
 # Publish step
 if ($Publish.IsPresent) {
